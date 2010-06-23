@@ -30,7 +30,7 @@ class My_Sagepay
      *
      * @var string
      */
-    protected $_vpsProtocol;
+    protected $_vpsProtocol = '2.23';
 
     /**
      *
@@ -90,6 +90,9 @@ class My_Sagepay
     public function setOptions(array $options = array())
     {
         $methods = get_class_methods($this);
+
+        $this->_checkRequiredOptions($options);
+
         foreach ($options as $key => $value) {
 
             $method = 'set' . ucfirst($key);
@@ -98,6 +101,29 @@ class My_Sagepay
             }
         }
         return $this;
+    }
+
+
+    /**
+     * Check for config options that are mandatory (according to Sagepay)
+     * Throw exceptions if any are missing.
+     *
+     * @param array $options
+     * @throws Zend_Db_Adapter_Exception
+     */
+    protected function _checkRequiredOptions(array $options)
+    {
+        // we need at least a dbname
+        if (! array_key_exists('vendor', $options)) {
+            /** @see Zend_Db_Adapter_Exception */
+            require_once 'My/Sagepay/Exception.php';
+            throw new My_Sagepay_Exception("Configuration array must have a key for 'vendor'");
+        }
+        if (! array_key_exists('currency', $options)) {
+            /** @see Zend_Db_Adapter_Exception */
+            require_once 'My/Sagepay/Exception.php';
+            throw new My_Sagepay_Exception("Configuration array must have a key for 'currency'");
+        }
     }
 
     /**

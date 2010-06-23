@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<phpunit bootstrap="./TestHelper.php">
+    <php>
+        <const name="ZEND_LIBRARY" value="" />
+    </php>
+</phpunit>
