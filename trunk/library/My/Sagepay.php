@@ -54,7 +54,7 @@ class My_Sagepay
      *
      * @var string
      */
-    protected $_currency;
+    protected $_currency = 'GBP';
 
     /**
      *
@@ -77,6 +77,9 @@ class My_Sagepay
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         }
+
+        $this->_checkRequiredOptions($options);
+
         $this->setOptions($options);
 
         $this->_setDefaultHttpClient();
@@ -90,8 +93,6 @@ class My_Sagepay
     public function setOptions(array $options = array())
     {
         $methods = get_class_methods($this);
-
-        $this->_checkRequiredOptions($options);
 
         foreach ($options as $key => $value) {
 
@@ -118,11 +119,6 @@ class My_Sagepay
             /** @see Zend_Db_Adapter_Exception */
             require_once 'My/Sagepay/Exception.php';
             throw new My_Sagepay_Exception("Configuration array must have a key for 'vendor'");
-        }
-        if (! array_key_exists('currency', $options)) {
-            /** @see Zend_Db_Adapter_Exception */
-            require_once 'My/Sagepay/Exception.php';
-            throw new My_Sagepay_Exception("Configuration array must have a key for 'currency'");
         }
     }
 

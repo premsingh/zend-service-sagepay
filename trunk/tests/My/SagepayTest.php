@@ -17,17 +17,6 @@ class My_SagepayTest extends PHPUnit_Framework_TestCase
         ));
     }
 
-
-    /**
-     * @expectedException My_Sagepay_Exception
-     */
-    public function testSetOptionsWithoutCurrencyThrows()
-    {
-        $sagepay = new My_Sagepay(array(
-            'vendor' => 'testVendor'
-        ));
-    }
-
     /**
      * Test that a Zend_Config File can be used to set options
      */
