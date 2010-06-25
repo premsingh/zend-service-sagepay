@@ -109,14 +109,13 @@ class My_Sagepay
      * Check for config options that are mandatory (according to Sagepay)
      * Throw exceptions if any are missing.
      *
-     * @param array $options
-     * @throws Zend_Db_Adapter_Exception
+     * @param  array $options
+     * @throws My_Sagepay_Exception
      */
     protected function _checkRequiredOptions(array $options)
     {
         // we need at least a dbname
         if (! array_key_exists('vendor', $options)) {
-            /** @see Zend_Db_Adapter_Exception */
             require_once 'My/Sagepay/Exception.php';
             throw new My_Sagepay_Exception("Configuration array must have a key for 'vendor'");
         }
