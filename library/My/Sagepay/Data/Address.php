@@ -56,7 +56,7 @@ class My_Sagepay_Data_Address
      *
      * @param Zend_Config|array $options
      */
-    public function __construct($options)
+    public function __construct($options = array())
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
